@@ -1,5 +1,15 @@
-{# src/Blogger/BlogBundle/Resources/views/Page/index.html.twig #}
 {% extends 'BloggerBlogBundle::layout.html.twig' %}
+
 {% block body %}
-    Blog homepage
+    {% for post in blogposts %}
+        <article>
+            <h2><a href="{{ path('view',{id : post.id}) }}">
+                    {{ post.title | title }}</a></h2>
+            <p>{{ post.blog | nl2br }}</p>
+            <p>
+                <small>Created by {{ post.author }} at
+                    {{ post.timestamp | date('H:i d/m/y') }}</small>
+            </p>
+        </article>
+    {% endfor %}
 {% endblock %}

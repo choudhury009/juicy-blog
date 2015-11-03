@@ -8,7 +8,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('BloggerBlogBundle:Default:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $blogPosts = $em->getRepository('BloggerBlogBundle:Post')
+            ->getLatest(10, 0);
+        return $this->render('BloggerBlogBundle:Default:index.html.twig',
+            ['blogposts' => $blogPosts]);
     }
 
 }
