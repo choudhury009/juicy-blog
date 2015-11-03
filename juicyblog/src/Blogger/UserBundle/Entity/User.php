@@ -18,9 +18,49 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var array
+     * @ORM\OneToMany(targetEntity="Blogger\BlogBundle\Entity\Post",mappedBy="author")
+     */
+    protected $posts;
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add post
+     *
+     * @param \Blogger\BlogBundle\Entity\Post $post
+     *
+     * @return User
+     */
+    public function addPost(\Blogger\BlogBundle\Entity\Post $post)
+    {
+        $this->posts[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * Remove post
+     *
+     * @param \Blogger\BlogBundle\Entity\Post $post
+     */
+    public function removePost(\Blogger\BlogBundle\Entity\Post $post)
+    {
+        $this->posts->removeElement($post);
+    }
+
+    /**
+     * Get posts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPosts()
+    {
+        return $this->posts;
     }
 }

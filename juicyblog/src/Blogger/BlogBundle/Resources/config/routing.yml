@@ -1,3 +1,24 @@
 blogger_blog_homepage:
     path:     /
     defaults: { _controller: BloggerBlogBundle:Default:index }
+
+view:
+    pattern: /view/{id}
+    defaults: { _controller: BloggerBlogBundle:Blog:view }
+    requirements:
+        id: \d+
+create:
+    pattern: /create
+    defaults: { _controller: BloggerBlogBundle:Blog:create }
+
+edit:
+    pattern: /edit/{id}
+    defaults: { _controller: BloggerBlogBundle:Blog:edit }
+    requirements:
+        id: \d+
+
+delete:
+    pattern: /delete/{id}
+    defaults: { _controller: BloggerBlogBundle:Blog:delete }
+    requirements:
+        id: \d+
