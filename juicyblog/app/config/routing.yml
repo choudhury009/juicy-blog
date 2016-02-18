@@ -1,3 +1,8 @@
+blogger_api:
+    type: rest
+    resource: "@BloggerApiBundle/Resources/config/routing.yml"
+    prefix: /api/v1
+
 blogger_user:
     resource: "@BloggerUserBundle/Resources/config/routing.yml"
     prefix:   /

@@ -1,53 +1,87 @@
-
+{# app/Resources/views/base.html.twig #}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{% block title %}Juicyblog{% endblock %}</title>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-
-        {% block stylesheets %}
-            {% stylesheets
-            'http://fonts.googleapis.com/css?family=Irish+Grover'
-            'http://fonts.googleapis.com/css?family=La+Belle+Aurore'
-            '../app/Resources/public/css/screen.css' %}
-            <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
-            {% endstylesheets %}
-        {% endblock %}
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    <section id="wrapper">
-        <header id="header">
-            <div class="top">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} Symblog{% endblock %} - Symblog</title>
+    {% block stylesheets %}
+        {% stylesheets
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'
+        '../app/Resources/public/css/screen.css' %}
+        <link href="{{ asset_url }} " type="text/css" rel="stylesheet"/>
+        {% endstylesheets %}
+    {% endblock %}
+    {% block javascript %}
+        {% javascripts
+        'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'
+        %}
+        <script type="text/javascript" src="{{ asset_url }} "></script>
+        {% endjavascripts %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }} "/>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                11
+                Advanced Web Development Symfony2 Configuration and Templating
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Symblog</a>
+            <div class="collapse navbar-collapse">
                 {% block navigation %}
-                    <nav>
-                        <ul class="navigation">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/create">New Blog</a></li>
-                        </ul>
-                    </nav>
-                {% endblock %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li>
+                        {% if app.user.username is defined %}
+                            <a href="/logout">Logout</a>
+                        {% else %}
+                            <a href="/login">Login</a>
+                        {% endif %}
+                    </li>
+                </ul>
             </div>
-            <strong>
-                <h2>{% block blog_title %}
-                    <a href="#">Juicy Blog</a>
-                {% endblock %}
-                </h2>
-            </strong>
-        </header>
-        <section class="main-col">
-            {% block body %}{% endblock %}
-        </section>
-        <aside class="sidebar">
-            {% block sidebar %}{% endblock %}
-        </aside>
-        <div id="footer">
-            {% block footer %}
-                Jannatul Choudhury
+
+            {#<nav>#}
+            {#<ul class="navigation">#}
+            {#<li><a href="/">Home</a></li>#}
+            {#<li><a href="{{ path('blogger_about') }} ">About</a></li>#}
+            {#<li><a href="#">Contact</a></li>#}
+            {#<li>#}
+            {#{% if app.user.username is defined %}#}
+            {#<a href="/logout">Logout</a>#}
+            {#{% else %}#}
+            {#<a href="/login">Login</a>#}
+            {#{% endif %}#}
+            {#</li>#}
+            {#</ul>#}
+            {#</nav>#}
             {% endblock %}
         </div>
-    </section>
-    {% block javascripts %}{% endblock %}
-    </body>
+    </nav>
+    <div class="row">
+        <section class="col-md-8">
+            {% block body %}{% endblock %}
+        </section>
+        <section class="col-md-4">
+            {% block sidebar %}{% endblock %}
+        </section>
+    </div>
+    <div class="footer">
+        {% block footer %}
+            <p>Symblog{% if app.user.username is defined %} - {{ app.user.username|capitalize }}{% endif %}</p>
+        {% endblock %}
+    </div>
+</div>
+</body>
 </html>

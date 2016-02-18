@@ -27,7 +27,8 @@ class PostType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Blogger\BlogBundle\Entity\Post'
+            'data_class' => 'Blogger\BlogBundle\Entity\Post',
+            'csrf_protection' => false
         ));
     }
 

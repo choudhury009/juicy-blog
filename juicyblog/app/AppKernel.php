@@ -20,6 +20,9 @@ class AppKernel extends Kernel
             new Blogger\BlogBundle\BloggerBlogBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Blogger\UserBundle\BloggerUserBundle(),
+            new \FOS\RestBundle\FOSRestBundle(),
+            new \JMS\SerializerBundle\JMSSerializerBundle(),
+            new Blogger\ApiBundle\BloggerApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
