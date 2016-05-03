@@ -33,6 +33,8 @@ security:
 
           logout:       true
           anonymous:    true
+          http_basic:
+            realm: 'Blogger'
 
 #      main:
 #          anonymous: ~

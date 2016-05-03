@@ -65,4 +65,29 @@ class BlogController extends FOSRestController
             return $this->handleView($this->view($form, 400));
         }
     }
+
+    public function putBlogpostAction(Request $request)
+    {
+
+    }
+
+    public function deleteBlogpostAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $blogPost = $em->getRepository('BloggerBlogBundle:Post')->find($id);
+        if(!$blogPost) {
+            // no blog entry is found, so we set the view
+            // to no content and set the status code to 404
+            $view = $this->view(null, 404);
+        } else {
+            // the blog entry exists, so we pass it to the view
+            // and the status code defaults to 200 "OK"
+            $em->remove($blogPost);
+            $em->flush();
+
+            $view = $this->view(null,200);
+        }
+
+        return $this->handleView($view);
+    }
 }
